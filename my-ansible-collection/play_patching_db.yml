@@ -9,13 +9,19 @@
           name: mysqld
           state: stopped
 
-      - name: Upgrade all packages but skip the Linux Kernel
+      - name: Upgrade all packages but skip the Linux Kernel and Java
         yum:
           name: '*'
           state: latest
           exclude: kernel*,java*,foo*
-      
-      - name: Upgrade all packages include Linux Kernel
+
+      - name: Upgrade Java if available but skip the Linux Kernel
+        yum:
+          name: '*'
+          state: latest
+          exclude: kernel*
+          
+      - name: Upgrade Linux Kernel if available
         yum:
           name: '*'
           state: latest
