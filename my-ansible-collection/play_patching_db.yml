@@ -4,6 +4,10 @@
     become: true
 
     tasks:
+      - name: Check the Uptime of the servers
+        shell: "uptime"
+        register: Uptime
+
       - name: Stopping database
         ansible.builtin.service:
           name: mysqld

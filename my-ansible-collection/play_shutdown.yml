@@ -1,0 +1,19 @@
+---
+- name: Shutdown All servers
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Shutting down all the servers
+      community.general.shutdown:
+
+#    - name: Delay shutting down the remote node
+#      community.general.shutdown:
+#      delay: 60
+
+#    - name: Shut down a machine with shutdown command in unusual place
+#      community.general.shutdown:
+#        search_paths:
+#          - '/lib/molly-guard'
+
+
