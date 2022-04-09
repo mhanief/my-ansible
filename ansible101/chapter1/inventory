@@ -1,0 +1,8 @@
+[example]
+#192.168.88.121
+#192.168.88.122
+ansible1.sh.local
+ansible2.sh.local
+#54.253.2.230 	# AWS syslog-client - ubuntu 14.04
+52.62.151.150 	# AWS syslog-server - CentOS7
+54.206.161.102	# AWS app.sh.local - RHEL8

@@ -1,0 +1,36 @@
+# App Prod Server
+[app_prod]
+app_prod ansible_host=10.2.2.117	# ADLTPGODRPT01
+[db_prod]
+10.1.1.117	# ADLTPGODDB01
+# App QA and DEV
+[app_qa]
+10.180.2.58     # ADLTPGQARPT01
+[app_dev]
+10.180.2.57     # ADLTPGDEVRPT01
+[app_qadev]
+10.180.2.58	# ADLTPGQARPT01
+10.180.2.57     # ADLTPGDEVRPT01
+# DB DEV
+[db_dev]
+10.180.2.59	# ADLTPGDEVDB01
+# App Prod, QA, DEV
+[app_all]
+10.2.2.117      # ADLTPGODRPT01
+10.180.2.58     # ADLTPGQARPT01
+10.180.2.57     # ADLTPGDEVRPT01
+# DB all
+[db_all]
+10.1.1.117      # ADLTPGODDB01
+10.180.2.59     # ADLTPGDEVDB01
+# all server
+[multi]
+app_prod ansible_host=10.2.2.117      # ADLTPGODRPT01
+10.1.1.117      # ADLTPGODDB01
+10.180.2.57     # ADLTPGDEVRPT01
+10.180.2.58     # ADLTPGQARPT01
+10.180.2.59     # ADLTPGDEVDB01
+# Variables for the all the servers
+[multi:vars]
+ansible_ssh_user=ans
+ansible_ssh_private_key_file=~/.ssh/id_rsa

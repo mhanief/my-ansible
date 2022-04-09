@@ -1,0 +1,40 @@
+---
+  - name: Patch Database Servers and Reboot if Needed
+    hosts: db
+    become: true
+
+    tasks:
+      - name: Stopping database
+        ansible.builtin.service:
+          name: mysqld
+          state: stopped
+
+      - name: Upgrade all packages but skip the Linux Kernel
+        yum:
+          name: '*'
+          state: latest
+          exclude: kernel*,java*,foo*
+      
+      - name: Upgrade all packages include Linux Kernel
+        yum:
+          name: '*'
+          state: latest
+
+      - name: Check to see if servers need a reboot
+        command: needs-restarting -r
+        register: result
+        ignore_errors: yes
+
+      - name: display result
+        debug:
+          var: result.rc
+
+      - name: Reboot Server if Necessary
+        reboot:
+          reboot_timeout: 3600
+        when: result.rc == 1
+
+      - name: Verify Database Service started
+        ansible.builtin.service:
+          name: mysqld
+          state: started

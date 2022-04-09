@@ -1,0 +1,34 @@
+# Prod Server
+app_prod ansible_host=10.2.2.117	# ADLTPGODRPT01
+db_prod ansible_host=10.1.1.117		# ADLTPGODDB01
+#
+# App QA and DEV
+app_qa ansible_host=10.180.2.58     	# ADLTPGQARPT01
+app_dev ansible_host=10.180.2.57     	# ADLTPGDEVRPT01
+#
+# DB DEV
+db_dev ansible_host=10.180.2.59		# ADLTPGDEVDB01
+#
+# App Prod, QA, DEV
+[app_all]
+app_prod ansible_host=10.2.2.117        # ADLTPGODRPT01
+app_qa ansible_host=10.180.2.58         # ADLTPGQARPT01
+app_dev ansible_host=10.180.2.57        # ADLTPGDEVRPT01
+#
+# DB all
+[db_all]
+db_prod ansible_host=10.1.1.117         # ADLTPGODDB01
+db_dev ansible_host=10.180.2.59         # ADLTPGDEVDB01
+#
+# all server
+[multi]
+app_prod ansible_host=10.2.2.117	# ADLTPGODRPT01
+db_prod ansible_host=10.1.1.117         # ADLTPGODDB01
+app_qa ansible_host=10.180.2.58         # ADLTPGQARPT01
+app_dev ansible_host=10.180.2.57        # ADLTPGDEVRPT01
+db_dev ansible_host=10.180.2.59         # ADLTPGDEVDB01
+#
+# Variables for the all the servers
+[multi:vars]
+ansible_ssh_user=ans
+ansible_ssh_private_key_file=~/.ssh/ans_analytics

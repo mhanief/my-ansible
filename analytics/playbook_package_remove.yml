@@ -1,0 +1,12 @@
+---
+- name: Remove packages
+  hosts: all
+  become: true
+
+  tasks:
+   - name: Removing packages installed by Ansible
+     yum:
+       name:
+         - tree
+         - dos2unix
+       state: absent

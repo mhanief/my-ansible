@@ -1,0 +1,71 @@
+---
+- name: Install required packages
+  hosts: all
+  become: true
+
+  tasks:
+   - name: Installing logical volume management tools (lvm2)
+     yum:
+       name: lvm2
+       state: latest
+
+   - name: Installing Name Service Caching Daemon (nscd)
+     yum:
+       name: nscd
+       state: latest
+
+   - name: Installing NFS utilities (nfs-utils)
+     yum:
+       name: nfs-utils
+       state: latest
+
+   - name: Installing System logging (rsyslog)
+     yum:
+       name: rsyslog
+       state: latest
+
+   - name: Istalling utility for retrieving files (wget)
+     yum:
+       name: dos2unix 
+       state: latest
+
+   - name: Installing VIM text editor package (vim)
+     yum:
+       name: vim
+       state: latest
+
+   - name: Installing YUM utility package (yum-utils)
+     yum:
+       name: yum-utils
+       state: latest
+
+   - name: Installing file compression utility package (zip, unzip)
+     yum:
+       name: 
+         - zip
+         - unzip
+       state: latest
+
+   - name: Installing Network utility package (net-tools, nmap-ncat)
+     yum:
+       name: 
+         - net-tools
+         - nmap-ncat
+       state: latest
+
+   - name: Installing Active Directory utility package
+     yum:
+       name:
+         - samba-common-tools
+         - realmd
+         - oddjob
+         - oddjob-mkhomedir
+         - sssd
+         - adcli
+         - krb5-workstation
+       state: latest
+
+   - name: Installing terminal multiplexer package (tmux)
+     yum:
+       name: tmux
+       state: latest
