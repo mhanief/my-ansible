@@ -6,11 +6,15 @@ wget https://raw.githubusercontent.com/mhanief/my-ansible/main/machine_setup/set
 chmod +x add_user_ansible.sh
 chmod +x setup_ip.sh
 #
-# Update IP address
-vi setup_ip.sh  <-- set hostname, ip address, default gateway, dns
-#
-# Run script
+# Create user ans + grant sudo access with password
 ./add_user_ansible.sh
+exit session
+- try accessing the machine using user "ans"
+ssh -i ~/.ssh/id_rsa ans@<IP_ADDRESS>
+- if success try "sudo su -" to make sure user ans can run sudo with password
+#
+# Update new IP address
+vi setup_ip.sh  <-- set hostname, ip address, default gateway, dns
 ./setup_ip.sh
-
-Note: After ip address changed, open new terminal and ssh using new IP address
+- You will disconnect from current session after you ran above srcipt
+- To test configuration, open new terminal and try to access server with new ip address.
