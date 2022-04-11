@@ -5,3 +5,4 @@ nmcli con mod profile ipv4.dns 8.8.8.8
 nmcli con mod profile ipv4.method manual
 nmcli con mod profile connection.autoconnect yes
 nmcli con up enp0s3
+echo -e "\n--> Below are your machine configuration: \n\nHostname: $(hostname -f)\n\n$(nmcli -p)"
