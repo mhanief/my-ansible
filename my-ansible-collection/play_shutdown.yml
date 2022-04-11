@@ -1,10 +1,10 @@
 ---
-- name: Shutdown All servers
+- name: Shutdown All Servers
   hosts: all
   become: true
 
   tasks:
-    - name: Shutting down all the servers
+    - name: Shutdown all servers
       community.general.shutdown:
 
 #    - name: Delay shutting down the remote node
