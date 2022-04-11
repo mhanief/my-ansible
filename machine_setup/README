@@ -18,3 +18,9 @@ vi setup_ip.sh  <-- set hostname, ip address, default gateway, dns
 ./setup_ip.sh
 - You will disconnect from current session after you ran above srcipt
 - To test configuration, open new terminal and try to access server with new ip address.
+#
+# remove config file
+rm -rf add_user_ansible.sh
+rm -rf setup_ip.sh
+#
+# END
