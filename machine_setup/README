@@ -1,0 +1,16 @@
+# Download files
+wget https://raw.githubusercontent.com/mhanief/my-ansible/main/machine_setup/add_user_ansible.sh
+wget https://raw.githubusercontent.com/mhanief/my-ansible/main/machine_setup/setup_ip.sh
+#
+# Change files permission
+chmod +x add_user_ansible.sh
+chmod +x setup_ip.sh
+#
+# Update IP address
+vi setup_ip.sh  <-- set hostname, ip address, default gateway, dns
+#
+# Run script
+./add_user_ansible.sh
+./setup_ip.sh
+
+Note: After ip address changed, open new terminal and ssh using new IP address
