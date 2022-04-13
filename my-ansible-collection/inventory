@@ -16,8 +16,13 @@ app02 ansible_host=192.168.88.102
 app03 ansible_host=192.168.88.103
 db01 ansible_host=192.168.88.104
 db02 ansible_host=192.168.88.105
+syslog-server ansible_host=52.62.151.150
 #
+# Test AWS server RHEL 7 - syslog-server
+[aws]
+syslog-server ansible_host=52.62.151.150
 # Variables for the all the servers
+#
 [multi:vars]
 ansible_ssh_user=ans
 ansible_ssh_private_key_file=~/.ssh/id_rsa

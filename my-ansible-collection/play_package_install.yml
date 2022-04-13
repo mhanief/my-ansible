@@ -1,6 +1,6 @@
 ---
 - name: Install required packages
-  hosts: all
+  hosts: aws
   become: true
 
   tasks:
@@ -28,6 +28,18 @@
      yum:
        name: dos2unix 
        state: latest
+
+   - name: Istalling performance tuning/monitoring tools
+     yum:
+       name: 
+         - perf
+         - sosreport
+         - sysstat
+         - lsof
+         - tcpdump
+         - iotop
+       state: latest
+       # ignore_errors: yes
 
    - name: Installing VIM text editor package (vim)
      yum:
