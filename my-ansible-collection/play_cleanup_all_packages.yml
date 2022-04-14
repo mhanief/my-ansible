@@ -1,0 +1,95 @@
+---
+- name: Cleanup all packages installed by Ansible
+  hosts: db_aws
+  become: true
+
+  tasks:
+   - name: Removing logical volume management tools (lvm2)
+     yum:
+       name: lvm2
+       state: absent
+
+   - name: Removing Name Service Caching Daemon (nscd)
+     yum:
+       name: nscd
+       state: absent
+
+   - name: Removing NFS utilities (nfs-utils)
+     yum:
+       name: nfs-utils
+       state: absent
+
+   - name: Removing System logging (rsyslog)
+     yum:
+       name: rsyslog
+       state: absent
+
+   - name: Istalling utility for retrieving files (wget)
+     yum:
+       name: dos2unix
+       state: absent
+
+   - name: Removing performance tuning/monitoring tools
+     yum:
+       name:
+         - perf
+           #   - sosreport
+           #  - htop
+         - sysstat
+         - lsof
+         - tcpdump
+         - iotop
+       state: absent
+
+   - name: Removing VIM text editor package (vim)
+     yum:
+       name: vim
+       state: absent
+
+   - name: Removing YUM utility package (yum-utils)
+     yum:
+       name: yum-utils
+       state: absent
+
+   - name: Removing file compression utility package (zip, unzip)
+     yum:
+       name:
+         - zip
+         - unzip
+       state: absent
+
+   - name: Removing Network utility package (net-tools, nmap-ncat)
+     yum:
+       name:
+         - net-tools
+         - nmap-ncat
+       state: absent
+
+   - name: Removing Active Directory utility package
+     yum:
+       name:
+         - samba-common-tools
+         - realmd
+         - oddjob
+         - oddjob-mkhomedir
+         - sssd
+         - adcli
+         - krb5-workstation
+       state: absent
+
+   - name: Removing terminal multiplexer package (tmux)
+     yum:
+       name: tmux
+       state: absent
+
+   - name: Removing EPEL Repository on CentOS 8
+     yum:
+       name: epel-release
+       state: absent
+     when: ansible_facts['os_family'] == 'RedHat' and ansible_facts['distribution_major_version'] == '8'
+
+   - name: Removing EPEL Repository on CentOS 7
+     yum:
+       name: epel-release
+       state: absent
+     when: ansible_facts['os_family'] == 'RedHat' and ansible_facts['distribution_major_version'] == '7'

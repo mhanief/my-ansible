@@ -1,6 +1,6 @@
 ---
 - name: Install required packages
-  hosts: aws
+  hosts: db_aws 
   become: true
 
   tasks:
@@ -33,13 +33,13 @@
      yum:
        name: 
          - perf
-         - sosreport
+           #   - sosreport
+           #  - htop
          - sysstat
          - lsof
          - tcpdump
          - iotop
        state: latest
-       # ignore_errors: yes
 
    - name: Installing VIM text editor package (vim)
      yum:
@@ -81,3 +81,15 @@
      yum:
        name: tmux
        state: latest
+
+   - name: Enable EPEL Repository on CentOS 8
+     yum:
+       name: epel-release
+       state: latest
+     when: ansible_facts['os_family'] == 'RedHat' and ansible_facts['distribution_major_version'] == '8'
+
+   - name: Enable EPEL Repository on CentOS 7
+     yum:
+       name: epel-release
+       state: latest
+     when: ansible_facts['os_family'] == 'RedHat' and ansible_facts['distribution_major_version'] == '7'
