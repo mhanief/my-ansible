@@ -1,0 +1,67 @@
+---
+- hosts: solr
+  become: true
+
+  vars_files:
+    - vars.yml
+
+  handlers:
+    - name: restart solr
+      service: name=solr state=restarted
+
+  tasks:
+    - name: Put SELinux in permissive mode
+      ansible.posix.selinux:
+        policy: targeted
+        state: permissive
+
+    - name: Allow Solr port 8983/tcp to be accessed
+      ansible.posix.firewalld:
+        port: 8983/tcp
+        permanent: yes
+        immediate: yes
+        state: enabled
+
+    - name: Installing pre-requisite packages (wget, zip, unzip, tar, vim)
+      yum:
+        name:
+          - zip
+          - unzip
+          - tar
+          - wget
+          - vim
+        state: latest
+
+    - name: Install java
+      yum: name=java-11-openjdk state=present
+      
+    - name: Download Solr
+      get_url:
+        url: "https://dlcdn.apache.org/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz"
+        dest: "{{ download_dir }}/solr-{{ solr_version }}.tgz"
+        checksum: "{{  solr_checksum }}"
+
+    - name: Expand Solr
+      ansible.builtin.unarchive:
+        src: "{{ download_dir }}/solr-{{ solr_version }}.tgz"
+        dest: "{{ download_dir }}"
+        remote_src: true
+        creates: "{{ download_dir }}/solr-{{ solr_version }}/README"
+
+    - name: Run Solr installation script
+      command: >
+        {{ download_dir }}/solr-{{ solr_version }}/bin/install_solr_service.sh
+        {{ download_dir }}/solr-{{ solr_version }}.tgz
+        -i /opt
+        -d /var/solr
+        -u solr
+        -s solr
+        -p 8983
+        creates={{ solr_dir }}/bin/solr
+
+    - name: Ensure Solr is started and enabled at boot
+      service: 
+        name: solr
+        state: started
+        enabled: yes
+
