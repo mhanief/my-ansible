@@ -51,11 +51,12 @@
        name: yum-utils
        state: latest
 
-   - name: Installing file compression utility package (zip, unzip)
+   - name: Installing file compression utility package (zip, unzip, tar)
      yum:
        name: 
          - zip
          - unzip
+         - tar
        state: latest
 
    - name: Installing Network utility package (net-tools, nmap-ncat)
